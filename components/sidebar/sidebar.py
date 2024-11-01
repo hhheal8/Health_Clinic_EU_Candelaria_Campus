@@ -4,6 +4,7 @@ from django_components import component
 class Sidebar(component.Component):
 
   template_name = "sidebar/template.html"
+  
 
   # def get_context_data(self):
   #   return {
