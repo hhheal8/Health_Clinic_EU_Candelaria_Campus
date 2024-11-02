@@ -4,6 +4,10 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-def admin_medical_report(request):
+def student_basic_information(request):
   context = {}
-  return render(request, "users/admin/medical_report.html", context)
+  return render(request, "users/student/basic_information.html", context)
+
+def student_physical_examination(request):
+  context = {}
+  return render(request, "users/student/physical_examination.html", context)

@@ -5,5 +5,6 @@ from . import views
 app_name = "users"
 
 urlpatterns = [
-  path("admin_dashboard/medical_report", views.admin_medical_report, name="admin_medical_report")
+  path("student/basic_information", views.student_basic_information, name="student_basic_information"),
+  path("student/physical_examination", views.student_physical_examination, name="student_physical_examination")
 ]
