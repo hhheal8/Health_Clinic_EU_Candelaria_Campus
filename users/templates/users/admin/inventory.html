@@ -1,0 +1,105 @@
+<div class="flex h-screen">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-red-900 text-white flex flex-col">
+    <div class="p-6">
+      <h1 class="text-2xl font-bold">Dashboard</h1>
+    </div>
+    <nav class="flex-1">
+      <ul>
+        <li class="px-6 py-3 hover:bg-red-800">
+          <a href="#" class="flex items-center space-x-2">
+            <span class="material-icons">dashboard</span>
+            <span>Student Record</span>
+          </a>
+        </li>
+        <li class="px-6 py-3 hover:bg-red-800">
+          <a href="#" class="flex items-center space-x-2">
+            <span class="material-icons">inventory</span>
+            <span>Inventory</span>
+            <span class="badge badge-accent">2</span>
+          </a>
+        </li>
+        <li class="px-6 py-3 hover:bg-red-800">
+          <a href="#" class="flex items-center space-x-2">
+            <span class="material-icons">assignment</span>
+            <span>Student Log Visit</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="p-6 mt-auto">
+      <a href="#" class="block text-center text-gray-300 hover:underline">Help</a>
+      <a href="#" class="block text-center text-gray-300 hover:underline">Contact us</a>
+      <a href="#" class="block text-center text-gray-300 hover:underline">Log out</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-10 bg-gray-50">
+    <header class="flex justify-between items-center mb-8">
+      <div>
+        <h2 class="text-3xl font-semibold">Nurse Admin</h2>
+        <p class="text-sm text-gray-500">Manuel S. Enverga University Foundation Candelaria Inc.</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <img src="https://via.placeholder.com/40" alt="User profile" class="w-10 h-10 rounded-full">
+        <span>Matthew Parker</span>
+      </div>
+    </header>
+
+    <!-- Inventory Section -->
+    <section>
+      <!-- Equipment Table -->
+      <div class="mb-6">
+        <div class="flex justify-between items-center mb-2">
+          <h3 class="text-lg font-medium">Equipment</h3>
+          <button class="btn btn-accent btn-sm">Add Inventory</button>
+        </div>
+        <table class="table w-full bg-white shadow rounded-lg overflow-hidden">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="p-4 text-left">Equipment</th>
+              <th class="p-4 text-left">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-4">Kumot</td>
+              <td class="p-4">10</td>
+            </tr>
+            <tr>
+              <td class="p-4"></td>
+              <td class="p-4"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Medicine Table -->
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <h3 class="text-lg font-medium">Medicine</h3>
+          <button class="btn btn-accent btn-sm">Add Medicine</button>
+        </div>
+        <table class="table w-full bg-white shadow rounded-lg overflow-hidden">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="p-4 text-left">Medicine</th>
+              <th class="p-4 text-left">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-4">Biogesic</td>
+              <td class="p-4">10</td>
+            </tr>
+            <tr>
+              <td class="p-4"></td>
+              <td class="p-4"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>

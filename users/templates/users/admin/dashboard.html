@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% load static tailwind_tags %}
+{% load component_tags %}
+{% load static %}
+
+{% block title %}
+  Admin Dashboard
+{% endblock title %}
+
+{% block main %}
+
+  <div class="flex min-h-screen bg-gray-100">
+    <!-- Sidebar -->
+    {% component "admin_sidebar" %}
+    {% endcomponent %}
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+      <!-- Header -->
+      {% component "admin_header" %}
+      {% endcomponent %}
+
+      <!-- Stats Section -->
+      <div class="grid grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <div class="bg-red-500 text-white rounded-lg p-6 shadow-md flex justify-between items-center">
+          <div>
+            <h3 class="text-lg font-semibold">Total Students</h3>
+            <p class="text-3xl font-bold">120</p>
+          </div>
+          <span class="text-2xl">&gt;</span>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white rounded-lg p-6 shadow-md flex justify-between items-center">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-700">Total Medicine</h3>
+            <p class="text-3xl font-bold text-gray-900">120</p>
+          </div>
+          <span class="text-gray-400 text-2xl">&gt;</span>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white rounded-lg p-6 shadow-md flex justify-between items-center">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-700">Total Equipments</h3>
+            <p class="text-3xl font-bold text-gray-900">963</p>
+          </div>
+          <span class="text-gray-400 text-2xl">&gt;</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+{% endblock main %}
