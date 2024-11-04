@@ -22,57 +22,81 @@
       {% endcomponent %}
 
       <!-- Inventory Section -->
-      <section>
+      <section class="bg-white rounded-lg shadow-md p-6">
         <!-- Equipment Table -->
         <div class="mb-6">
           <div class="flex justify-between items-center mb-2">
             <h3 class="text-lg font-medium text-black">Equipment</h3>
-            <button class="btn btn-sm">Add Inventory</button>
           </div>
-          <table class="table w-full border border-gray-200 bg-white shadow rounded-lg overflow-hidden">
-            <thead>
-              <tr class="bg-gray-100">
-                <th class="p-4 border-b text-left text-black">Equipment</th>
-                <th class="p-4 border-b text-left text-black">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="hover:bg-gray-50">
-                <td class="p-4 border-b text-black">Kumot</td>
-                <td class="p-4 border-b text-black">10</td>
-              </tr>
-              <tr class="hover:bg-gray-50">
-                <td class="p-4 border-b text-black"></td>
-                <td class="p-4 border-b text-black"></td>
-              </tr>
-            </tbody>
-          </table>
+          <form method="POST" action="{% url 'users:admin_inventory' %}" class="overflow-x-auto">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="equipment">
+            <table class="table w-full border border-gray-200">
+              <thead>
+                <tr>
+                  <th class="px-4 py-2 border-b text-left text-black font-semibold">Equipment</th>
+                  <th class="px-4 py-2 border-b text-left text-black font-semibold">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in equipment_lists %}
+                  <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-2 border-b text-black">{{ item.equipment }}</td>
+                    <td class="px-4 py-2 border-b text-black">{{ item.total_equipment }}</td>
+                  </tr>
+                {% endfor %}
+                <tr class="hover:bg-gray-50">
+                  <td class="px-4 py-2 border-b text-black">
+                    <input type="text" name="equipment" placeholder="Input Equipment Name" class="input input-bordered bg-white w-full">
+                  </td>
+                  <td class="px-4 py-2 border-b text-black">
+                    <input type="text" name="total_equipment" placeholder="Input Equipment Total" class="input input-bordered bg-white w-full">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="flex justify-end mb-4">
+              <button type="submit" class="bg-red-800 hover:bg-red-900 text-white font-semibold py-2 px-4 rounded-full">Add Equipment</button>
+            </div>
+          </form>
         </div>
 
         <!-- Medicine Table -->
-        <div>
+        <div class="mb-6">
           <div class="flex justify-between items-center mb-2">
             <h3 class="text-lg font-medium text-black">Medicine</h3>
-            <button class="btn btn-sm">Add Medicine</button>
           </div>
-          <table class="table w-full border border-gray-200 bg-white shadow rounded-lg overflow-hidden">
-            <thead>
-              <tr class="bg-gray-100">
-                <th class="p-4 border-b text-left text-black">Medicine</th>
-                <th class="p-4 border-b text-left text-black">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="hover:bg-gray-50">
-                <td class="p-4 border-b text-black">Biogesic</td>
-                <td class="p-4 border-b text-black">10</td>
-              </tr>
-              <tr class="hover:bg-gray-50">
-                <td class="p-4 border-b text-black"></td>
-                <td class="p-4 border-b text-black"></td>
-              </tr>
-            </tbody>
-          </table>
+          <form method="POST" action="{% url 'users:admin_inventory' %}" class="overflow-x-auto">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="medicine">
+            <table class="table w-full border border-gray-200">
+              <thead>
+                <tr class="bg-gray-100">
+                  <th class="px-4 py-2 border-b text-left text-black font-semibold">Medicine</th>
+                  <th class="px-4 py-2 border-b text-left text-black font-semibold">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in medicine_lists %}
+                  <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-2 border-b text-black">{{ item.medicine }}</td>
+                    <td class="px-4 py-2 border-b text-black">{{ item.total_medicine }}</td>
+                  </tr>
+                {% endfor %}
+                <tr class="hover:bg-gray-50">
+                  <td class="px-4 py-2 border-b text-black">
+                    <input type="text" name="medicine" placeholder="Input Medicine Name" class="input input-bordered bg-white w-full">
+                  </td>
+                  <td class="px-4 py-2 border-b text-black">
+                    <input type="text" name="total_medicine" placeholder="Input Medicine Total" class="input input-bordered bg-white w-full">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="flex justify-end mb-4">
+              <button type="submit" class="bg-red-800 hover:bg-red-900 text-white font-semibold py-2 px-4 rounded-full">Add Medicine</button>
+            </div>
+          </form>
         </div>
       </section>
     </main>

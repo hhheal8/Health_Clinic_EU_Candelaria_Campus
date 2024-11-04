@@ -17,14 +17,9 @@
 
     <!-- Main Content -->
     <main class="flex-1 p-6">
-      <!-- Top Bar -->
-      <div class="flex items-center justify-between mb-6">
-        <div class="text-gray-800 text-2xl font-semibold">Medical Report</div>
-        <div class="flex items-center space-x-4">
-          <img src="https://via.placeholder.com/32" alt="User Avatar" class="rounded-full w-8 h-8">
-          <span>Gil Rovero</span>
-        </div>
-      </div>
+      <!-- Header -->
+      {% component "header" %}
+      {% endcomponent %}
 
       <!-- Add Student Basic Information Form -->
       <div class="bg-white p-8 rounded-lg shadow-md">

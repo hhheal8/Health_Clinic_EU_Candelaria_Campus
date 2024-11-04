@@ -24,7 +24,7 @@
       <!-- Table Section -->
       <div class="bg-white rounded-lg shadow-md p-6">        
         <!-- Table -->
-        <form method="POST" action="" class="overflow-x-auto">
+        <form method="POST" action="{% url 'users:admin_student_log_visit' %}" class="overflow-x-auto">
           {% csrf_token %}
           <table class="table w-full border border-gray-200">
             <thead>
@@ -49,27 +49,27 @@
               <!-- Additional empty rows -->
               <tr class="hover:bg-gray-50">
                 <td class="px-4 py-2 border-b text-black">
-                  <input type="text" name="" class="input input-bordered w-full" placeholder="Juan Dela Cruz">
+                  <input type="text" name="" class="input input-bordered bg-white w-full">
                 </td>
                 <td class="px-4 py-2 border-b text-black">
-                  <input type="text" name="" class="input input-bordered w-full" placeholder="Juan Dela Cruz">
+                  <input type="text" name="" class="input input-bordered bg-white w-full">
                 </td>
                 <td class="px-4 py-2 border-b text-black">
-                  <input type="text" name="" class="input input-bordered w-full" placeholder="Juan Dela Cruz">
+                  <input type="text" name="" class="input input-bordered bg-white w-full">
                 </td>
                 <td class="px-4 py-2 border-b text-black">
-                  <input type="text" name="" class="input input-bordered w-full" placeholder="Juan Dela Cruz">
+                  <input type="text" name="" class="input input-bordered bg-white w-full">
                 </td>
                 <td class="px-4 py-2 border-b text-black">
-                  <input type="text" name="" class="input input-bordered w-full" placeholder="Juan Dela Cruz">
+                  <input type="text" name="" class="input input-bordered bg-white w-full">
                 </td>
                 <td class="px-4 py-2 border-b text-black">
-                  <input type="text" name="" class="input input-bordered w-full" placeholder="Juan Dela Cruz">
+                  <input type="text" name="" class="input input-bordered bg-white w-full">
                 </td>
               </tr>
           </table>
           <div class="flex justify-end mb-4">
-            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-full">Add Student Log</button>
+            <button type="submit" class="bg-red-800 hover:bg-red-900 text-white font-semibold py-2 px-4 rounded-full">Add Student Log</button>
           </div>
         </form>
       </div>
