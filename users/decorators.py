@@ -1,6 +1,5 @@
 from functools import wraps
 from django.shortcuts import redirect
-from django.contrib.auth.decorators import user_passes_test
 
 def admin_required(view_fun):
   @wraps(view_fun)

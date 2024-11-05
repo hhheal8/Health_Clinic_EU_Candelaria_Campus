@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .decorators import admin_required, student_required
 from .models import EucUsers, EucStudents, EucHealthClinicInventory
 from django.db.models import Sum
+from datetime import datetime
 
 # Actions
 
@@ -12,6 +13,10 @@ def user_login(request):
     username = request.POST.get("username")
     password = request.POST.get("password")
     print(f"Attempting to authenticate user: `{username}`")
+
+    username = username.strip()
+    password = password.strip()
+
     user = authenticate(request, username=username, password=password)
     if user is not None:
       print(f"User `{username}` authenticated successfully")
@@ -25,8 +30,17 @@ def user_login(request):
     else:
       error_message = "Invalid username or password. Try again."
       print(f"Authentication failed for user: `{username}`")
+
+      # Additional checks
+      try:
+        user_check = EucUsers.objects.get(username=username)
+        print("Check if the user is_active: ", user_check.is_active)
+        print("Check if the user is_staff: ", user_check.is_staff)
+      except EucUsers.DoesNotExist:
+        print("User does not exist")
+
       return render(request, "index.html", {"error_message": error_message})
-    
+
   return render(request, "index.html")
 
 def user_logout(request):
@@ -147,9 +161,9 @@ def student_basic_information(request):
     last_name = request.POST.get("last_name")
     age = request.POST.get("age")
     sex = request.POST.get("sex")
-    date_of_exam = request.POST.get("date_of_exam")
+    date_of_exam = request.POST.get("date_of_exam") or None
     address = request.POST.get("address")
-    date_of_birth = request.POST.get("date_of_birth")
+    date_of_birth = request.POST.get("date_of_birth") or None
     contact_number = request.POST.get("contact_number")
     status = request.POST.get("status")
     fathers_name = request.POST.get("fathers_name")
@@ -166,6 +180,9 @@ def student_basic_information(request):
     user.middle_name = middle_name
     user.last_name = last_name
     user.save()
+
+    date_of_exam = datetime.strptime(date_of_exam, "%Y-%m-%d").date() if date_of_exam else None
+    date_of_birth = datetime.strptime(date_of_birth, "%Y-%m-%d").date() if date_of_birth else None
 
     EucStudents.objects.update_or_create(
       user=user,
@@ -187,7 +204,7 @@ def student_basic_information(request):
       }
     )
 
-    return redirect("users:student_basic_information")
+    return redirect("users:student_physical_examination")
 
   context = {}
 
@@ -195,6 +212,9 @@ def student_basic_information(request):
 
 @student_required
 def student_physical_examination(request):
+  user = request.user
+  student = get_object_or_404(EucStudents, user=user)
+
   if request.method == "POST":
     height = request.POST.get("height")
     weight = request.POST.get("weight")
@@ -212,32 +232,30 @@ def student_physical_examination(request):
     abdomen = request.POST.get("abdomen")
     remarks = request.POST.get("remarks")
 
-    user = request.user
-
-    EucStudents.objects.update_or_create(
-      user=user,
-      defaults={
-        "height": height,
-        "weight": weight,
-        "bmi": bmi,
-        "eyes_vision_right": eyes_vision_right,
-        "eyes_vision_left": eyes_vision_left,
-        "ears_vision_right": ears_vision_right,
-        "ears_vision_left": ears_vision_left,
-        "skin": skin,
-        "mouth": mouth,
-        "nose": nose,
-        "bp": bp,
-        "rate": rate,
-        "lungs": lungs,
-        "abdomen": abdomen,
-        "remarks": remarks
-      }
+    EucStudents.objects.filter(user=user).update(
+      height=height or student.height,
+      weight=weight or student.weight,
+      bmi=bmi or student.bmi,
+      eyes_vision_right=eyes_vision_right or student.eyes_vision_right,
+      eyes_vision_left=eyes_vision_left or student.eyes_vision_left,
+      ears_vision_right=ears_vision_right or student.ears_vision_right,
+      ears_vision_left=ears_vision_left or student.ears_vision_left,
+      skin=skin or student.skin,
+      mouth=mouth or student.mouth,
+      nose=nose or student.nose,
+      bp=bp or student.bp,
+      rate=rate or student.rate,
+      lungs=lungs or student.lungs,
+      abdomen=abdomen or student.abdomen,
+      remarks=remarks or student.remarks
     )
 
     return redirect("users:student_physical_examination")
 
-  context = {}
+  context = {
+    "student": student
+  }
 
   return render(request, "users/student/physical_examination.html", context)
+
 

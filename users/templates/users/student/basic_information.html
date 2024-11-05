@@ -29,38 +29,38 @@
 
         <form method="POST" action="{% url 'users:student_basic_information' %}" class="grid grid-cols-4 gap-4">
           {% csrf_token %}
-          <input type="text" name="first_name" placeholder="First Name" class="input input-bordered bg-white w-full" required>
-          <input type="text" name="middle_name" placeholder="Middle Name" class="input input-bordered bg-white w-full" required>
-          <input type="text" name="last_name" placeholder="Last Name" class="input input-bordered bg-white w-full" required>
+          <input type="text" name="first_name" placeholder="First Name" class="input input-bordered bg-white text-black w-full" required>
+          <input type="text" name="middle_name" placeholder="Middle Name" class="input input-bordered bg-white text-black w-full" required>
+          <input type="text" name="last_name" placeholder="Last Name" class="input input-bordered bg-white text-black w-full" required>
 
-          <input type="number" name="age" placeholder="Age" class="input input-bordered bg-white w-full" required>
+          <input type="number" name="age" placeholder="Age" class="input input-bordered bg-white text-black w-full" required>
 
-          <select name="sex" class="select select-bordered w-full max-w-xs">
-            <option disabled value="default" {% if form.sex.value == "default" %} selected {% endif %}>Choose not to say</option>
+          <select name="sex" class="select select-bordered w-full max-w-xs text-black bg-white">
+            <option value="default" {% if form.sex.value == "default" %} selected {% endif %}>Choose not to say</option>
             <option value="male" {% if form.sex.value == "male" %} selected {% endif %}>Male</option>
             <option value="female" {% if form.sex.value == "female" %} selected {% endif %}>Female</option>
           </select>
 
-          <input type="date" name="date_of_exam" placeholder="Date of Examination" class="input input-bordered bg-white w-full" required>
-          <input type="text" name="address" placeholder="Address" class="input input-bordered bg-white w-full">
-          <input type="date" name="date_of_birth" placeholder="Date of Birth" class="input input-bordered bg-white w-full">
-          <input type="text" name="contact_number" placeholder="Contact Number" class="input input-bordered bg-white w-full">
-          <input type="text" name="status" placeholder="Status" class="input input-bordered bg-white w-full">
+          <input type="date" name="date_of_exam" placeholder="Date of Examination" class="input input-bordered bg-white text-black w-full" required>
+          <input type="text" name="address" placeholder="Address" class="input input-bordered bg-white text-black w-full">
+          <input type="date" name="date_of_birth" placeholder="Date of Birth" class="input input-bordered bg-white text-black w-full">
+          <input type="text" name="contact_number" placeholder="Contact Number" class="input input-bordered bg-white text-black w-full">
+          <input type="text" name="status" placeholder="Status" class="input input-bordered bg-white text-black w-full">
 
-          <input type="text" name="fathers_name" placeholder="Father's Name" class="input input-bordered bg-white w-full">
-          <input type="text" name="fathers_contact" placeholder="Contact Number" class="input input-bordered bg-white w-full">
-          <input type="text" name="fathers_occupation" placeholder="Occupation (Father)" class="input input-bordered bg-white w-full">
+          <input type="text" name="fathers_name" placeholder="Father's Name" class="input input-bordered bg-white text-black w-full">
+          <input type="number" name="fathers_contact" placeholder="Contact Number" class="input input-bordered bg-white text-black w-full">
+          <input type="text" name="fathers_occupation" placeholder="Occupation (Father)" class="input input-bordered bg-white text-black w-full">
 
-          <input type="text" name="mothers_name" placeholder="Mother's Name" class="input input-bordered bg-white w-full">
-          <input type="text" name="mothers_contact" placeholder="Contact Number" class="input input-bordered bg-white w-full">
-          <input type="text" name="mothers_occupation" placeholder="Occupation (Mother)" class="input input-bordered bg-white w-full">
+          <input type="text" name="mothers_name" placeholder="Mother's Name" class="input input-bordered bg-white text-black w-full">
+          <input type="number" name="mothers_contact" placeholder="Contact Number" class="input input-bordered bg-white text-black w-full">
+          <input type="text" name="mothers_occupation" placeholder="Occupation (Mother)" class="input input-bordered bg-white text-black w-full">
 
-          <input type="text" name="email" placeholder="Email/Gmail" class="input input-bordered bg-white w-full">
-          <textarea name="medical_history" placeholder="Medical History" class="textarea textarea-bordered bg-white w-full col-span-2"></textarea>
+          <input type="text" name="email" placeholder="Email/Gmail" class="input input-bordered bg-white text-black w-full">
+          <textarea name="medical_history" placeholder="Medical History" class="textarea textarea-bordered bg-white text-black w-full col-span-2"></textarea>
 
-          <div class="flex justify-between items-center mb-6">
+          {% comment %} <div class="flex justify-between items-center mb-6"> {% endcomment %}
             <button type="submit" class="btn bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">Submit Student Basic Information</button>
-          </div>
+          {% comment %} </div> {% endcomment %}
         </form>
       </div>
     </main>

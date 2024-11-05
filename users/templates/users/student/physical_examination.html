@@ -28,27 +28,27 @@
 
         <form method="POST" action="{% url 'users:student_physical_examination' %}" class="grid grid-cols-3 gap-4">
           {% csrf_token %}
-          <input type="text" name="height" placeholder="Height" class="input input-bordered bg-white w-full" />
-          <input type="text" name="weight" placeholder="Weight" class="input input-bordered bg-white w-full" />
-          <input type="number" name="bmi" placeholder="BMI" class="input input-bordered bg-white w-full" />
+          <input type="text" name="height" value="{{ student.height }}" placeholder="Height" class="input input-bordered bg-white text-black w-full" />
+          <input type="text" name="weight" value="{{ student.weight }}" placeholder="Weight" class="input input-bordered bg-white text-black w-full" />
+          <input type="number" name="bmi" value="{{ student.bmi }}" placeholder="BMI" class="input input-bordered bg-white text-black w-full" />
 
-          <input type="text" name="eyes_vision_right" placeholder="Eyes/Vision Right" class="input input-bordered bg-white w-full" />
-          <input type="text" name="eyes_vision_left" placeholder="Eyes/Vision Left" class="input input-bordered bg-white w-full" />
+          <input type="text" name="eyes_vision_right" value="{{ student.eyes_vision_right }}" placeholder="Eyes/Vision Right" class="input input-bordered bg-white text-black w-full" />
+          <input type="text" name="eyes_vision_left" value="{{ student.eyes_vision_left }}" placeholder="Eyes/Vision Left" class="input input-bordered bg-white text-black w-full" />
 
-          <input type="text" name="ears_vision_right" placeholder="Ears/Hearing Right" class="input input-bordered bg-white w-full" />
-          <input type="text" name="ears_vision_left" placeholder="Ears/Hearing Left" class="input input-bordered bg-white w-full" />
+          <input type="text" name="ears_vision_right" value="{{ student.ears_vision_right }}" placeholder="Ears/Hearing Right" class="input input-bordered bg-white text-black w-full" />
+          <input type="text" name="ears_vision_left" value="{{ student.ears_vision_left }}" placeholder="Ears/Hearing Left" class="input input-bordered bg-white text-black w-full" />
 
-          <input type="text" name="skin" placeholder="Skin" class="input input-bordered bg-white w-full" />
-          <input type="text" name="mouth" placeholder="Mouth" class="input input-bordered bg-white w-full" />
-          <input type="text" name="nose" placeholder="Nose" class="input input-bordered bg-white w-full" />
+          <input type="text" name="skin" value="{{ student.skin }}" placeholder="Skin" class="input input-bordered bg-white text-black w-full" />
+          <input type="text" name="mouth" value="{{ student.mouth }}" placeholder="Mouth" class="input input-bordered bg-white text-black w-full" />
+          <input type="text" name="nose" value="{{ student.nose }}" placeholder="Nose" class="input input-bordered bg-white text-black w-full" />
 
-          <input type="text" name="bp" placeholder="BP" class="input input-bordered bg-white w-full" />
-          <input type="text" name="rate" placeholder="Rate" class="input input-bordered bg-white w-full" />
-          <input type="text" name="lungs" placeholder="Lungs" class="input input-bordered bg-white w-full" />
+          <input type="text" name="bp" value="{{ student.bp }}" placeholder="BP" class="input input-bordered bg-white text-black w-full" />
+          <input type="text" name="rate" value="{{ student.rate }}" placeholder="Rate" class="input input-bordered bg-white text-black w-full" />
+          <input type="text" name="lungs" value="{{ student.lungs }}" placeholder="Lungs" class="input input-bordered bg-white text-black w-full" />
 
-          <input type="text" name="abdomen" placeholder="Abdomen" class="input input-bordered bg-white w-full" />
+          <input type="text" name="abdomen" value="{{ student.abdomen }}" placeholder="Abdomen" class="input input-bordered bg-white text-black w-full" />
 
-          <textarea name="remarks" class="textarea textarea-bordered bg-white bg-white w-full col-span-2" placeholder="Remarks"></textarea>
+          <textarea name="remarks" class="textarea textarea-bordered bg-white text-black w-full col-span-2" placeholder="Remarks">{{ student.remarks }}</textarea>
 
           <div class="flex justify-between items-center mb-6">
             <button type="submit" class="btn bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">Submit Student Physical Examination</button>

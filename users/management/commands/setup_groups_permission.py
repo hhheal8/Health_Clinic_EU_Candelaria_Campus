@@ -33,10 +33,9 @@
 
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import Group, Permission
-from users.models import EucUsers
 
 class Command(BaseCommand):
-  help = 'Setup groups and permissions'
+  help = 'Setup groups and permissions for `Nurse`'
 
   def handle(self, *args, **kwargs):
     # Nurses group and permissions
@@ -51,4 +50,4 @@ class Command(BaseCommand):
     )
     nurses_group.permissions.add(*nurse_permissions)
 
-    self.stdout.write(self.style.SUCCESS('Successfully set up groups and permissions for Nurse'))
+    self.stdout.write(self.style.SUCCESS('Successfully set up groups and permissions for `Nurse`'))

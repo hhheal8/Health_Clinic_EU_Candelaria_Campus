@@ -56,6 +56,10 @@ AUTH_USER_MODEL = "users.EucUsers"
 
 LOGIN_URL = "/"
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
