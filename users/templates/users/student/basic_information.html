@@ -27,7 +27,7 @@
           <h2 class="text-lg font-semibold text-gray-700">Student Basic Information</h2>
         </div>
 
-        <form method="POST" action="" class="grid grid-cols-4 gap-4">
+        <form method="POST" action="users:student_basic_information" class="grid grid-cols-4 gap-4">
           {% csrf_token %}
           <input type="text" name="first_name" placeholder="First Name" class="input input-bordered bg-white w-full" required>
           <input type="text" name="middle_name" placeholder="Middle Name" class="input input-bordered bg-white w-full" required>

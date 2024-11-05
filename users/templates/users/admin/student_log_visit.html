@@ -26,6 +26,15 @@
         <!-- Table -->
         <form method="POST" action="{% url 'users:admin_student_log_visit' %}" class="overflow-x-auto">
           {% csrf_token %}
+          <div>
+            {% for message in messages %}
+              {% if message.tags == "error" %}
+                <p class="text-red-600">{{ message }}</p>
+              {% else %}
+                <p class="text-green-600">{{ message }}</p>
+              {% endif %}
+            {% endfor %}
+          </div>
           <table class="table w-full border border-gray-200">
             <thead>
               <tr>
@@ -38,38 +47,40 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="hover:bg-gray-50">
-                <td class="px-4 py-2 border-b text-black">Juan Dela Cruz</td>
-                <td class="px-4 py-2 border-b text-black">BSCS</td>
-                <td class="px-4 py-2 border-b text-black">4th year</td>
-                <td class="px-4 py-2 border-b text-black">Tubig</td>
-                <td class="px-4 py-2 border-b text-black">Headache</td>
-                <td class="px-4 py-2 border-b text-black">10-30-24</td>
-              </tr>
+              {% for student in students %}
+                <tr class="hover:bg-gray-50">
+                  <td class="px-4 py-2 border-b text-black">{{ student.user.full_name }}</td>
+                  <td class="px-4 py-2 border-b text-black">{{ student.course }}</td>
+                  <td class="px-4 py-2 border-b text-black">{{ student.year_level }}</td>
+                  <td class="px-4 py-2 border-b text-black">{{ student.medicine_treatment }}</td>
+                  <td class="px-4 py-2 border-b text-black">{{ student.reason }}</td>
+                  <td class="px-4 py-2 border-b text-black">{{ student.date_of_visit }}</td>
+                </tr>
+              {% endfor %}
               <!-- Additional empty rows -->
               <tr class="hover:bg-gray-50">
                 <td class="px-4 py-2 border-b text-black">
-                  <input type="text" name="" class="input input-bordered bg-white w-full">
+                  <input type="text" name="student_name" placeholder="Input Student Name or Full Name" class="input input-bordered bg-white w-full">
                 </td>
                 <td class="px-4 py-2 border-b text-black">
-                  <input type="text" name="" class="input input-bordered bg-white w-full">
+                  <input type="text" name="course" placeholder="Input Course" class="input input-bordered bg-white w-full">
                 </td>
                 <td class="px-4 py-2 border-b text-black">
-                  <input type="text" name="" class="input input-bordered bg-white w-full">
+                  <input type="text" name="year_level" placeholder="Input Year Level" class="input input-bordered bg-white w-full">
                 </td>
                 <td class="px-4 py-2 border-b text-black">
-                  <input type="text" name="" class="input input-bordered bg-white w-full">
+                  <input type="text" name="medicine_treatment" placeholder="Input Medicine/Treatment" class="input input-bordered bg-white w-full">
                 </td>
                 <td class="px-4 py-2 border-b text-black">
-                  <input type="text" name="" class="input input-bordered bg-white w-full">
+                  <input type="text" name="reason" placeholder="Input Reason" class="input input-bordered bg-white w-full">
                 </td>
                 <td class="px-4 py-2 border-b text-black">
-                  <input type="text" name="" class="input input-bordered bg-white w-full">
+                  <input type="date" name="date_of_visit" class="input input-bordered bg-white w-full">
                 </td>
               </tr>
           </table>
           <div class="flex justify-end mb-4">
-            <button type="submit" class="bg-red-800 hover:bg-red-900 text-white font-semibold py-2 px-4 rounded-full">Add Student Log</button>
+            <button type="submit" class="bg-red-800 hover:bg-red-900 text-white font-semibold py-2 px-4 rounded-full">Add Student Log Visit</button>
           </div>
         </form>
       </div>
