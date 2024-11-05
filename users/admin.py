@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import EucUsers, EucStudents
+from .models import EucUsers, EucStudents, EucHealthClinicInventory
 
 # from django.contrib.auth.admin import UserAdmin --- default
 # admin.site.register(EucUsers, UserAdmin) --- default
@@ -31,6 +31,23 @@ class EucStudentsAdmin(admin.ModelAdmin):
   list_display = ("user", "age", "course", "year_level", "date_of_exam")
   search_fileds = ("user__username", "user__full_name", "user__first_name", "user__last_name")
   list_filter = ("course", "year_level")
+  ordering = ("user", )
+
+  def has_change_permission(self, request, obj=None):
+    if request.user.groups.filter(name="Nurse").exists() or request.user.is_superuser:
+      return True
+    return False
+  
+  def has_delete_permission(self, request, obj=None):
+    if request.user.groups.filter(name="Nurse").exists() or request.user.is_superuser:
+      return True
+    return False
+
+@admin.register(EucHealthClinicInventory)
+class EucHealthClinicInventoryAdmin(admin.ModelAdmin):
+  list_display = ("user", "equipment", "total_equipment", "medicine", "total_medicine")
+  search_fields = ("user__username", "equipment", "medicine")
+  list_filter = ("equipment", "medicine")
   ordering = ("user", )
 
   def has_change_permission(self, request, obj=None):
