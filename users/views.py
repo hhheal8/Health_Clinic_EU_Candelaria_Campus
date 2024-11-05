@@ -1,6 +1,5 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.contrib.auth.models import Group
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .decorators import admin_required, student_required
 from .models import EucUsers, EucStudents, EucHealthClinicInventory

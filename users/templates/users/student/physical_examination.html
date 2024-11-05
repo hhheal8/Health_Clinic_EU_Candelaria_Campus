@@ -26,7 +26,7 @@
         <h3 class="text-lg font-semibold mb-4 text-gray-700">Physical Examination</h3>
         <p class="text-gray-400 mb-6">To be performed by the Medical staff upon enrollment</p>
 
-        <form method="POST" action="users:student_physical_examination" class="grid grid-cols-3 gap-4">
+        <form method="POST" action="{% url 'users:student_physical_examination' %}" class="grid grid-cols-3 gap-4">
           {% csrf_token %}
           <input type="text" name="height" placeholder="Height" class="input input-bordered bg-white w-full" />
           <input type="text" name="weight" placeholder="Weight" class="input input-bordered bg-white w-full" />
