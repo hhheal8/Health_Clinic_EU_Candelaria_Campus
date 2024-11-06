@@ -63,6 +63,44 @@ def admin_dashboard(request):
 
   return render(request, "users/admin/dashboard.html", context)
 
+# Do not delete
+# @admin_required
+# def admin_inventory(request):
+#   if request.method == "POST":
+#     form_type = request.POST.get("form_type")
+
+#     if form_type == "equipment":
+#       equipment_name = request.POST.get("equipment")
+#       equipment_total = request.POST.get("total_equipment")
+
+#       EucHealthClinicInventory.objects.create(
+#         user=request.user,
+#         equipment=equipment_name,
+#         total_equipment=equipment_total
+#       )
+
+#     elif form_type == "medicine":
+#       medicine_name = request.POST.get("medicine")
+#       medicine_total = request.POST.get("total_medicine")
+
+#       EucHealthClinicInventory.objects.create(
+#         user=request.user,
+#         medicine=medicine_name,
+#         total_medicine=medicine_total
+#       )
+    
+#     return redirect("users:admin_inventory")
+
+#   equipment_lists = EucHealthClinicInventory.objects.filter(equipment__isnull=False)
+#   medicine_lists = EucHealthClinicInventory.objects.filter(medicine__isnull=False)
+
+#   context = {
+#     "equipment_lists": equipment_lists,
+#     "medicine_lists": medicine_lists
+#   }
+
+#   return render(request, "users/admin/inventory.html", context)
+
 @admin_required
 def admin_inventory(request):
   if request.method == "POST":
@@ -72,22 +110,34 @@ def admin_inventory(request):
       equipment_name = request.POST.get("equipment")
       equipment_total = request.POST.get("total_equipment")
 
-      EucHealthClinicInventory.objects.create(
-        user=request.user,
+      inventory, created = EucHealthClinicInventory.objects.update_or_create(
         equipment=equipment_name,
-        total_equipment=equipment_total
+        defaults={
+          'total_equipment': equipment_total,
+          'user': request.user
+        }
       )
+      if created:
+        messages.success(request, "New equipment added.")
+      else:
+        messages.success(request, "Equipment updated.")
 
     elif form_type == "medicine":
       medicine_name = request.POST.get("medicine")
       medicine_total = request.POST.get("total_medicine")
 
-      EucHealthClinicInventory.objects.create(
-        user=request.user,
+      inventory, created = EucHealthClinicInventory.objects.update_or_create(
         medicine=medicine_name,
-        total_medicine=medicine_total
+        defaults={
+          'total_medicine': medicine_total,
+          'user': request.user
+        }
       )
-    
+      if created:
+        messages.success(request, "New medicine added.")
+      else:
+        messages.success(request, "Medicine updated.")
+
     return redirect("users:admin_inventory")
 
   equipment_lists = EucHealthClinicInventory.objects.filter(equipment__isnull=False)
@@ -99,6 +149,58 @@ def admin_inventory(request):
   }
 
   return render(request, "users/admin/inventory.html", context)
+
+# Do not delete
+# @admin_required
+# def admin_student_log_visit(request):
+#   if request.method == "POST":
+#     student_full_name = request.POST.get("student_name")
+#     course = request.POST.get("course")
+#     year_level = request.POST.get("year_level")
+#     medicine_treatment = request.POST.get("medicine_treatment")
+#     reason = request.POST.get("reason")
+#     date_of_visit = request.POST.get("date_of_visit")
+
+#     name_parts = student_full_name.split()
+
+#     if len(name_parts) == 2:
+#       first_name, last_name = name_parts
+#       middle_name = ""
+#     elif len(name_parts) == 3:
+#       first_name, middle_name, last_name = name_parts
+#     else:
+#       messages.error(request,  "Please enter a valid full name (First Name, Middle Name, and Last Name)")
+#       return redirect("users:admin_student_log_visit")
+    
+#     user, created = EucUsers.objects.get_or_create(
+#       first_name=first_name,
+#       middle_name=middle_name,
+#       last_name=last_name,
+#       defaults={"username": first_name + middle_name + last_name}
+#     )
+#     if created:
+#       messages.success(request, "New user created successfully.")
+#     else:
+#       messages.success(request, "User found and used.")
+
+#     EucStudents.objects.create(
+#       user=user,
+#       course=course,
+#       year_level=year_level,
+#       medicine_treatment=medicine_treatment,
+#       reason=reason,
+#       date_of_visit=date_of_visit
+#     )
+
+#     return redirect("users:admin_student_log_visit")
+  
+#   students = EucStudents.objects.all()
+
+#   context = {
+#     "students": students
+#   }
+
+#   return render(request, "users/admin/student_log_visit.html", context)
 
 @admin_required
 def admin_student_log_visit(request):
@@ -118,9 +220,9 @@ def admin_student_log_visit(request):
     elif len(name_parts) == 3:
       first_name, middle_name, last_name = name_parts
     else:
-      messages.error(request,  "Please enter a valid full name (First Name, Middle Name, and Last Name)")
+      messages.error(request, "Please enter a valid full name (First Name, Middle Name, and Last Name)")
       return redirect("users:admin_student_log_visit")
-    
+
     user, created = EucUsers.objects.get_or_create(
       first_name=first_name,
       middle_name=middle_name,
@@ -132,17 +234,25 @@ def admin_student_log_visit(request):
     else:
       messages.success(request, "User found and used.")
 
-    EucStudents.objects.create(
+    # Check if the student already exists
+    student, created = EucStudents.objects.update_or_create(
       user=user,
-      course=course,
-      year_level=year_level,
-      medicine_treatment=medicine_treatment,
-      reason=reason,
-      date_of_visit=date_of_visit
+      defaults={
+        "course": course,
+        "year_level": year_level,
+        "medicine_treatment": medicine_treatment,
+        "reason": reason,
+        "date_of_visit": date_of_visit
+      }
     )
 
+    if created:
+      messages.success(request, "Student log visit created successfully.")
+    else:
+      messages.success(request, "Student log visit updated successfully.")
+
     return redirect("users:admin_student_log_visit")
-  
+
   students = EucStudents.objects.all()
 
   context = {
